@@ -1,0 +1,13 @@
+    <div class="card mb-4 box-shadow">
+      <img class="card-img-top" alt="Poster" style="height: 225px; width: 100%; display: block;" ng-src="{{movie.Poster}}" data-holder-rendered="true">
+      <div class="card-body">
+        <p class="card-text">{{movie.Title}}</p>
+        <p class="card-text">{{movie.Year}}</p>
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="btn-group">
+            <button type="button" class="btn btn-sm btn-outline-secondary" ng-click="viewMovieDetail(movie)">View</button>
+          </div>
+          <small class="text-muted">{{movie.Type}}</small>
+        </div>
+      </div>
+    </div>
