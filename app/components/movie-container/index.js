@@ -1,24 +1,24 @@
 
 'use strict';
 angular.module('myApp.movie-container', [])
-.directive('movieContainer', ['$uibModal', function($uibModal) {
-  console.log('hi')
+.directive('movieContainer', ['$uibModal', '$http', function($uibModal, $http) {
   const movieContainerLink = (scope, element, attrs) => {
-    console.log('worked')
-    const modalController = ()=>{
-      console.log('him')
-    }
-    scope.viewMovieDetail=(movieObj)=>{
-      
-      $uibModal.open({
-        templateUrl: '/components/movie-detail-modal/index.html',
-        size: 'lg',
-        ariaLabelledBy: 'modal-title',
-        ariaDescribedBy: 'modal-body',
-        animation: false,
-        backdrop: false,
-        controller: modalController
-      })
+    scope.viewMovieDetail = (movieObj) => {
+      $http.post('https://webjet-movie-api.herokuapp.com/movie', movieObj)
+        .then((movieDetail) => {
+          scope.movieDetail = movieDetail.data
+          console.log(scope)
+          $uibModal.open({
+            templateUrl: '/components/movie-detail-modal/index.html',
+            size: 'lg',
+            animation: false,
+            backdrop: false,
+            resolve: {
+              movieDetail: function () { return scope.movieDetail }
+            },
+            controller: 'movieDetailModalContorller'
+          })
+        })
     }
   }
   return {
@@ -27,6 +27,6 @@ angular.module('myApp.movie-container', [])
     scope: {
       movie: '=?'
     },
-    link:movieContainerLink
+    link: movieContainerLink
   }
 }])

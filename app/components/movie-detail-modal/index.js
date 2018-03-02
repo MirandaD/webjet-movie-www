@@ -1,10 +1,8 @@
-angular.module('myApp.movie-detail-modal', [])
-.component('movieDetailModal', {
-    bindings: {
-        resolve: '<',
-        close: '&',
-        dismiss: '&'
-    },
-    templateUrl: '/components/movie-detail-modal/index.html'
-  }
-)
+// 'use strict'
+
+// angular.module('myApp', [])
+//   .controller('movieDetailModalContorller', ['$scope', '$http', '$uibModalInstance', 'movieDetail',
+//     function ($scope, $http, $uibModalInstance, movieDetail) {
+//       $scope.movieDetail = movieDetail
+//       console.log($scope.movieDetail)
+//     }])

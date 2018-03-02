@@ -8,14 +8,21 @@ angular.module('myApp', [
   'ngRoute',
   'myApp.view1',
   'myApp.view2',
-  'myApp.movie-container',
-  'myApp.movie-detail-modal'
-]).
-controller('movieListController', ['$scope', '$http','$uibModal', movieListController])
+  'myApp.movie-container'
+])
+  .controller('movieListController', ['$scope', '$http', '$uibModal', movieListController])
+  .controller('movieDetailModalContorller', ['$scope', '$http', '$uibModalInstance', 'movieDetail',
+    function ($scope, $http, $uibModalInstance, movieDetail) {
+      $scope.movieDetail = movieDetail
+      $scope.close = () => {
+        $uibModalInstance.close()
+        console.log('hihihii')
+      }
+    }])
 
 function movieListController($scope, $http, $uibModal){
   $scope.loadMovies = ()=>{
-    $http.get('http://localhost:3001/movie-list')
+    $http.get('https://webjet-movie-api.herokuapp.com/movie-list')
     .then(resmovieList=>{
       $scope.movieList = resmovieList.data
     })
